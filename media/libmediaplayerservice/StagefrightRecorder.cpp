@@ -1499,7 +1499,7 @@ status_t StagefrightRecorder::setupCameraSource(
         *cameraSource = AVFactory::get()->CreateCameraSourceFromCamera(
                 mCamera, mCameraProxy, mCameraId, mClientName, mClientUid, mClientPid,
                 videoSize, mFrameRate,
-                mPreviewSurface);
+                mPreviewSurface, false);
     }
     AVUtils::get()->cacheCaptureBuffers(mCamera, mVideoEncoder);
     mCamera.clear();

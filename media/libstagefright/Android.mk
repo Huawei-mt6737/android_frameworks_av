@@ -165,6 +165,10 @@ ifeq ($(TARGET_OMX_LEGACY_RESCALING),true)
 LOCAL_CFLAGS += -DUSE_LEGACY_RESCALING
 endif
 
+ifeq ($(BOARD_USES_MTK_HARDWARE),true)
+LOCAL_SHARED_LIBRARIES += libdpframework
+endif
+
 LOCAL_CFLAGS += -Wno-multichar -Werror -Wno-error=deprecated-declarations -Wall
 
 LOCAL_C_INCLUDES += $(call project-path-for,qcom-media)/mm-core/inc
@@ -200,6 +204,17 @@ LOCAL_CFLAGS += -DUSE_SAMSUNG_COLORFORMAT
 LOCAL_C_INCLUDES += \
 	$(TOP)/hardware/samsung/exynos4/hal/include \
 	$(TOP)/hardware/samsung/exynos4/include
+endif
+
+# Mediatek
+ifeq ($(strip $(BOARD_HAS_MTK_HARDWARE)),true)
+LOCAL_CFLAGS += -DMTK_HARDWARE
+
+LOCAL_C_INCLUDES += \
+	$(TOP)/hardware/mediatek/dpframework/inc
+
+LOCAL_SHARED_LIBRARIES += \
+	libdpframework
 endif
 
 LOCAL_MODULE:= libstagefright
